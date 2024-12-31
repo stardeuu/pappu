@@ -1,0 +1,19 @@
+{
+  "name": "pappu",
+  "module": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch run index.js",
+    "start": "bun run index.js"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "bottleneck": "^2.19.5",
+    "puppeteer": "^23.11.1"
+  }
+}
