@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "bun --watch run index.js",
-    "start": "bun run index.js"
+    "start": "bun run index.js",
+    "postinstall": "npx puppeteer install"
   },
   "devDependencies": {
     "@types/bun": "latest"
