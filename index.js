@@ -1,8 +1,8 @@
 import { serve } from "bun";
 import { extract_kwik } from "./handlers/pahe.js";
-
+const port = process.env.PORT || 3000;
 const server = serve({
-  port: 3000,
+  port: port,
   idleTimeout: 255,
   async fetch(req, server) {
     try {
