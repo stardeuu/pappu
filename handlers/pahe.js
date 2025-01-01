@@ -1,3 +1,4 @@
+const axios = require("axios");
 const Bottleneck = require("bottleneck");
 const puppeteer = require("puppeteer");
 
@@ -25,6 +26,12 @@ const extract_kwik = async (url) => {
     try {
       if (!url?.length) return null;
       console.log("getting", url);
+      let { data } = await axios.get(url, {
+        headers: { referer: "https://animepahe.ru" },
+      });
+      let func = eval(`(${data?.match(/eval\(.*\)/)[0].split("eval(")[2]}`);
+      let source = func?.match(/source='([^']+)'/)[1];
+      if (source) return source || null;
       const browser = await initBrowser();
       const page = await browser.newPage();
       await page.setDefaultNavigationTimeout(120000);
