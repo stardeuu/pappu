@@ -12,10 +12,7 @@ const initBrowser = async () => {
   if (!browser) {
     browser = await puppeteer.launch({
       headless: true,
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-      ],
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
       ignoreDefaultArgs: ["--disable-extensions"],
       timeout: 120000,
     });
@@ -27,6 +24,7 @@ const extract_kwik = async (url) => {
   return limiter.schedule(async () => {
     try {
       if (!url?.length) return null;
+      console.log("getting", url);
       const browser = await initBrowser();
       const page = await browser.newPage();
       await page.setDefaultNavigationTimeout(120000);
@@ -50,7 +48,7 @@ const extract_kwik = async (url) => {
       await page.close();
       return m3u8Url || null;
     } catch (error) {
-      console.error("Error extracting m3u8 URL:", error.message);
+      console.log("Error extracting m3u8 URL:", error?.message);
       return null;
     }
   });
