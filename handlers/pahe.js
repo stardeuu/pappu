@@ -24,6 +24,7 @@ const initBrowser = async () => {
         "--disable-gpu",
       ],
       ignoreDefaultArgs: ["--disable-extensions"],
+      timeout: 120000,
     });
   }
   return browser;
@@ -35,6 +36,8 @@ const extract_kwik = async (url) => {
       if (!url?.length) return null;
       const browser = await initBrowser();
       const page = await browser.newPage();
+      await page.setDefaultNavigationTimeout(120000);
+      await page.setDefaultTimeout(120000);
       let m3u8Url = "";
       await page.setRequestInterception(true);
       page.on("request", (request) => {
@@ -49,6 +52,7 @@ const extract_kwik = async (url) => {
       await page.goto(url, {
         waitUntil: "domcontentloaded",
         referer: "https://kwik.si/",
+        timeout: 120000,
       });
       await page.close();
       return m3u8Url || null;
