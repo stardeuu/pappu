@@ -23,6 +23,7 @@ const initBrowser = async () => {
         "--single-process",
         "--disable-gpu",
       ],
+      ignoreDefaultArgs: ["--disable-extensions"],
     });
   }
   return browser;
