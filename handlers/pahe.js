@@ -3,7 +3,7 @@ const Bottleneck = require("bottleneck");
 const puppeteer = require("puppeteer");
 
 const limiter = new Bottleneck({
-  maxConcurrent: 10,
+  maxConcurrent: 5,
   minTime: 100,
 });
 
