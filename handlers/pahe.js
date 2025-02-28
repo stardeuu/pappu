@@ -12,7 +12,7 @@ let browser;
 const initBrowser = async () => {
   if (!browser) {
     browser = await puppeteer.launch({
-      headless: "new",
+      headless: true,
       devtools: 0,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
       ignoreDefaultArgs: ["--disable-extensions"],
