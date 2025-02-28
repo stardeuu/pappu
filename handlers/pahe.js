@@ -12,7 +12,8 @@ let browser;
 const initBrowser = async () => {
   if (!browser) {
     browser = await puppeteer.launch({
-      headless: true,
+      headless: "new",
+      devtools: 0,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
       ignoreDefaultArgs: ["--disable-extensions"],
       timeout: 120000,
@@ -26,12 +27,12 @@ const extract_kwik = async (url) => {
     try {
       if (!url?.length) return null;
       console.log("getting", url);
-      let { data } = await axios.get(url, {
-        headers: { referer: "https://animepahe.ru" },
-      });
-      let func = eval(`(${data?.match(/eval\(.*\)/)[0].split("eval(")[2]}`);
-      let source = func?.match(/source='([^']+)'/)[1];
-      if (source) return source || null;
+      // let { data } = await axios.get(url, {
+      //   headers: { referer: "https://animepahe.ru" },
+      // });
+      // let func = eval(`(${data?.match(/eval\(.*\)/)[0].split("eval(")[2]}`);
+      // let source = func?.match(/source='([^']+)'/)[1];
+      // if (source) return source || null;
       const browser = await initBrowser();
       const page = await browser.newPage();
       await page.setDefaultNavigationTimeout(120000);
