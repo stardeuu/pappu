@@ -22,6 +22,30 @@ const initBrowser = async () => {
   return browser;
 };
 
+const extract_zaza = async (url) => {
+  return limiter.schedule(async () => {
+    try {
+      if (!url?.length) return null;
+      console.log("getting", url);
+      const browser = await initBrowser();
+      const page = await browser.newPage();
+      await page.setDefaultNavigationTimeout(120000);
+      await page.setDefaultTimeout(120000);
+      const response = await page.goto(url, {
+        waitUntil: "domcontentloaded",
+        referer: "https://animez.org/",
+        timeout: 120000,
+      });
+      const data = await response.text();
+      await page.close();
+      console.log(data);
+      return data || null;
+    } catch (error) {
+      console.log("Error extracting m3u8 URL:", error?.message);
+      return null;
+    }
+  });
+};
 const extract_kwik = async (url) => {
   return limiter.schedule(async () => {
     try {
@@ -62,4 +86,4 @@ const extract_kwik = async (url) => {
   });
 };
 
-module.exports = { extract_kwik };
+module.exports = { extract_kwik, extract_zaza };
