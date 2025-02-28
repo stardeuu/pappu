@@ -38,7 +38,6 @@ const extract_zaza = async (url) => {
       });
       const data = await response.text();
       await page.close();
-      console.log(data);
       return data || null;
     } catch (error) {
       console.log("Error extracting m3u8 URL:", error?.message);
